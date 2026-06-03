@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="BAZI PRO — платформа персональной аналитики личности, потенциала и жизненных циклов на основе китайской метафизики. Профессиональный расчёт Бацзы за 30 секунд.">
+  <title>BAZI PRO — Персональная аналитика и жизненные циклы</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&family=Noto+Serif+SC:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="#" class="logo">
+        <span class="logo__mark" aria-hidden="true">命</span>
+        BAZI PRO
+      </a>
+      <nav class="nav" aria-label="Основная навигация">
+        <a href="#calculator">Калькулятор</a>
+        <a href="#insights">Аналитика</a>
+        <a href="#products">Продукты</a>
+        <a href="#ai">AI-Ассистент</a>
+        <a href="#pricing">Подписка</a>
+      </nav>
+      <a href="#calculator" class="btn btn--primary btn--sm header-cta">Построить карту</a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Открыть меню" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <nav class="nav-mobile" id="nav-mobile" aria-label="Мобильное меню">
+      <a href="#calculator">Калькулятор Бацзы</a>
+      <a href="#insights">Что вы узнаете</a>
+      <a href="#trust-why">Почему нам доверяют</a>
+      <a href="#products">Структура продукта</a>
+      <a href="#ai">AI-Ассистент</a>
+      <a href="#pricing">Подписка PRO</a>
+      <a href="#calculator" class="btn btn--primary" style="margin-top:0.5rem;text-align:center">Построить карту бесплатно</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero" id="top">
+      <div class="container hero__grid">
+        <div class="hero__content">
+          <div class="hero__badge">
+            <span class="hero__badge-dot"></span>
+            Платформа персональной аналитики · v3.0
+          </div>
+          <h1>Узнайте свой потенциал и жизненные циклы за 30 секунд</h1>
+          <p class="hero__subtitle">
+            Профессиональный анализ личности, карьеры, финансов и отношений на основе китайской метафизики — без эзотерики и гаданий.
+          </p>
+          <div class="hero__actions">
+            <a href="#calculator" class="btn btn--primary">Построить карту бесплатно</a>
+            <a href="#trust-why" class="btn btn--ghost">Как это работает</a>
+          </div>
+        </div>
+        <div class="hero__visual">
+          <div class="chart-card">
+            <div class="chart-card__header">
+              <div>
+                <div class="chart-card__title">Баланс пяти элементов</div>
+                <div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.25rem">Визуализация карты · 四柱</div>
+              </div>
+              <span class="chart-card__cjk" aria-hidden="true">八字</span>
+            </div>
+            <svg class="elements-ring" viewBox="0 0 200 200" role="img" aria-label="Диаграмма пяти элементов">
+              <circle cx="100" cy="100" r="88" fill="none" stroke="rgba(30,30,30,0.06)" stroke-width="1"/>
+              <polygon points="100,20 175,75 150,165 50,165 25,75" fill="rgba(17,94,89,0.06)" stroke="#115E59" stroke-width="1.5"/>
+              <circle cx="100" cy="55" r="14" fill="#115E59" opacity="0.9"/>
+              <circle cx="155" cy="95" r="11" fill="#B08D57" opacity="0.85"/>
+              <circle cx="130" cy="155" r="10" fill="#6B7280" opacity="0.7"/>
+              <circle cx="70" cy="155" r="9" fill="#1E1E1E" opacity="0.5"/>
+              <circle cx="45" cy="95" r="12" fill="#115E59" opacity="0.5"/>
+              <line x1="100" y1="100" x2="100" y2="55" stroke="#115E59" stroke-width="1" opacity="0.4"/>
+              <line x1="100" y1="100" x2="155" y2="95" stroke="#B08D57" stroke-width="1" opacity="0.4"/>
+              <line x1="100" y1="100" x2="130" y2="155" stroke="#6B7280" stroke-width="1" opacity="0.3"/>
+              <line x1="100" y1="100" x2="70" y2="155" stroke="#1E1E1E" stroke-width="1" opacity="0.25"/>
+              <line x1="100" y1="100" x2="45" y2="95" stroke="#115E59" stroke-width="1" opacity="0.3"/>
+            </svg>
+            <div class="element-legend">
+              <span>Дерево</span>
+              <span>Огонь</span>
+              <span>Земля</span>
+              <span>Металл</span>
+              <span>Вода</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trust stats -->
+    <section class="trust reveal" aria-label="Показатели доверия">
+      <div class="container trust__grid">
+        <div class="stat">
+          <div class="stat__value">100K+</div>
+          <div class="stat__label">пользователей</div>
+        </div>
+        <div class="stat">
+          <div class="stat__value">1M+</div>
+          <div class="stat__label">построенных карт</div>
+        </div>
+        <div class="stat">
+          <div class="stat__value">4.9</div>
+          <div class="stat__stars" aria-hidden="true">★★★★★</div>
+          <div class="stat__label">рейтинг сервиса</div>
+        </div>
+        <div class="stat">
+          <div class="stat__value">30 с</div>
+          <div class="stat__label">до первого анализа</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- What you'll learn -->
+    <section class="section reveal" id="insights">
+      <div class="container">
+        <p class="section-label">Персональная аналитика</p>
+        <h2 class="section-title">Что вы узнаете из карты</h2>
+        <p class="section-desc">
+          Каждый сложный термин сопровождается подсказкой и примером из жизни — вы никогда не почувствуете себя потерянным.
+        </p>
+        <div class="insights__grid">
+          <article class="insight-card">
+            <div class="insight-card__icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+            </div>
+            <h3>Личность</h3>
+            <p>Ваши сильные стороны, тип энергии и особенности характера.</p>
+          </article>
+          <article class="insight-card">
+            <div class="insight-card__icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg>
+            </div>
+            <h3>Карьера</h3>
+            <p>Подходящие направления развития и периоды профессионального роста.</p>
+          </article>
+          <article class="insight-card">
+            <div class="insight-card__icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <h3>Финансы</h3>
+            <p>Модель заработка и денежный потенциал в разные циклы удачи.</p>
+          </article>
+          <article class="insight-card">
+            <div class="insight-card__icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <h3>Отношения</h3>
+            <p>Особенности партнёрства, семьи и совместимости.</p>
+          </article>
+          <article class="insight-card">
+            <div class="insight-card__icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            </div>
+            <h3>Удача</h3>
+            <p>Лучшие периоды для действий — такты Da Yun и годовые прогнозы.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why trust -->
+    <section class="section section--alt reveal" id="trust-why">
+      <div class="container">
+        <p class="section-label">Точность расчёта</p>
+        <h2 class="section-title">Почему нам доверяют</h2>
+        <p class="section-desc">
+          Не гороскопы и не приблизительные таблицы — профессиональный движок с астрономической точностью.
+        </p>
+        <div class="trust-points">
+          <div class="trust-point">
+            <span class="trust-point__check" aria-hidden="true">✓</span>
+            <div>
+              <strong>Астрономически точный расчёт</strong>
+              <span>Солнечные сезоны Jie Qi, Li Chun для годового столпа, цикл 60 Цзя Цзы для дня.</span>
+            </div>
+          </div>
+          <div class="trust-point">
+            <span class="trust-point__check" aria-hidden="true">✓</span>
+            <div>
+              <strong>Реальные часовые пояса</strong>
+              <span>IANA Time Zone Database, исторические изменения времени и переходы на летнее время.</span>
+            </div>
+          </div>
+          <div class="trust-point">
+            <span class="trust-point__check" aria-hidden="true">✓</span>
+            <div>
+              <strong>Истинное солнечное время</strong>
+              <span>Опциональный режим: стандартное время + поправка долготы + уравнение времени.</span>
+            </div>
+          </div>
+          <div class="trust-point">
+            <span class="trust-point__check" aria-hidden="true">✓</span>
+            <div>
+              <strong>Профессиональные алгоритмы Бацзы</strong>
+              <span>Господин дня, полезный Бог, слияния, столкновения, скрытые небесные стволы.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Calculator -->
+    <section class="section reveal" id="calculator">
+      <div class="container calculator">
+        <p class="section-label">Калькулятор Бацзы</p>
+        <h2 class="section-title">Постройте карту за 30 секунд</h2>
+        <p class="section-desc">
+          Укажите данные рождения — система автоматически определит координаты, часовой пояс и исторические поправки времени.
+        </p>
+        <div class="calculator__wrap">
+          <form class="calc-form" id="bazi-form" action="#" method="get">
+            <div class="calc-form__grid">
+              <div class="form-group">
+                <label for="birth-date">Дата рождения</label>
+                <input type="date" id="birth-date" name="birth_date" required>
+              </div>
+              <div class="form-group">
+                <label for="birth-time">Время рождения</label>
+                <input type="time" id="birth-time" name="birth_time" required>
+              </div>
+              <div class="form-group">
+                <label for="gender">Пол</label>
+                <select id="gender" name="gender" required>
+                  <option value="">Выберите</option>
+                  <option value="male">Мужской</option>
+                  <option value="female">Женский</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="country">Страна</label>
+                <select id="country" name="country" required>
+                  <option value="">Выберите страну</option>
+                  <option value="ru">Россия</option>
+                  <option value="kz">Казахстан</option>
+                  <option value="by">Беларусь</option>
+                  <option value="ua">Украина</option>
+                  <option value="other">Другая</option>
+                </select>
+              </div>
+              <div class="form-group form-group--full">
+                <label for="city">Город <span class="hint">— для координат и часового пояса</span></label>
+                <input type="text" id="city" name="city" placeholder="Например: Москва" required autocomplete="address-level2">
+              </div>
+            </div>
+            <p class="calc-form__note">
+              Расчёт учитывает китайские двойные часы, точные моменты Jie Qi и не использует фиксированные даты сезонов или год по Китайскому Новому году.
+            </p>
+            <button type="submit" class="btn btn--primary calc-form__submit">Рассчитать карту</button>
+          </form>
+          <div class="calc-features">
+            <div class="calc-feature">
+              <span class="calc-feature__num">01</span>
+              <span>Четыре столпа судьбы — год, месяц, день, час</span>
+            </div>
+            <div class="calc-feature">
+              <span class="calc-feature__num">02</span>
+              <span>Баланс элементов, сила карты, полезный Бог</span>
+            </div>
+            <div class="calc-feature">
+              <span class="calc-feature__num">03</span>
+              <span>Такты удачи Da Yun с датами и описанием периодов</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reviews -->
+    <section class="section section--alt reveal">
+      <div class="container">
+        <p class="section-label">Отзывы</p>
+        <h2 class="section-title">«Это действительно очень похоже на меня»</h2>
+        <div class="reviews__grid">
+          <blockquote class="review">
+            <p class="review__text">«Наконец сервис, который объясняет карту простым языком. Использую для планирования запусков проектов — периоды роста совпали с реальностью.»</p>
+            <footer>
+              <div class="review__author">Алексей К.</div>
+              <div class="review__role">Предприниматель</div>
+            </footer>
+          </blockquote>
+          <blockquote class="review">
+            <p class="review__text">«Как консультант ценю точность: исторические часовые пояса и Jie Qi работают корректно. Лучший русскоязычный калькулятор.»</p>
+            <footer>
+              <div class="review__author">Марина В.</div>
+              <div class="review__role">Практикующий консультант</div>
+            </footer>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- Product structure -->
+    <section class="section reveal" id="products">
+      <div class="container">
+        <p class="section-label">Экосистема</p>
+        <h2 class="section-title">Структура платформы</h2>
+        <p class="section-desc">Единая SaaS-платформа: от бесплатной карты до академии и маркетплейса консультаций.</p>
+        <div class="products__grid">
+          <a href="#calculator" class="product-link"><span>Калькулятор Бацзы</span><span class="arrow" aria-hidden="true">→</span></a>
+          <a href="#" class="product-link"><span>Личный кабинет</span><span class="arrow" aria-hidden="true">→</span></a>
+          <a href="#" class="product-link"><span>Блог и SEO-контент</span><span class="arrow" aria-hidden="true">→</span></a>
+          <a href="#" class="product-link"><span>Академия Бацзы</span><span class="arrow" aria-hidden="true">→</span></a>
+          <a href="#" class="product-link"><span>Консультации</span><span class="arrow" aria-hidden="true">→</span></a>
+          <a href="#ai" class="product-link"><span>AI-Ассистент</span><span class="arrow" aria-hidden="true">→</span></a>
+          <a href="#pricing" class="product-link"><span>Подписка PRO</span><span class="arrow" aria-hidden="true">→</span></a>
+          <a href="#pricing" class="product-link"><span>PDF-отчёт 30–50 стр.</span><span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- AI -->
+    <section class="section section--alt reveal" id="ai">
+      <div class="container ai-block">
+        <div>
+          <p class="section-label">AI-консультант</p>
+          <h2 class="section-title">Вопросы к карте — ответы за секунды</h2>
+          <p class="section-desc">
+            AI отвечает на основании вашей карты: карьера, бизнес, сильные стороны и перспективные периоды.
+          </p>
+          <div class="ai-questions" role="list">
+            <button type="button" data-question="Когда менять работу?">Когда менять работу?</button>
+            <button type="button" data-question="Стоит ли открывать бизнес?">Стоит ли открывать бизнес?</button>
+            <button type="button" data-question="Какие периоды наиболее перспективны?">Перспективные периоды</button>
+            <button type="button" data-question="Какие мои сильные стороны?">Сильные стороны</button>
+          </div>
+        </div>
+        <div class="ai-demo" id="ai-demo">
+          <div class="ai-demo__q" id="ai-question">Когда менять работу?</div>
+          <div class="ai-demo__a" id="ai-answer">
+            По текущему такту Da Yun (2024–2033) энергия карьеры усиливается с 2026 года. Оптимальное окно для смены — вторая половина 2026, когда месячный столп поддерживает элемент Господина дня. Подробный разбор — в PRO-анализе.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="section reveal" id="pricing">
+      <div class="container">
+        <p class="section-label">Монетизация</p>
+        <h2 class="section-title">Выберите уровень доступа</h2>
+        <div class="pricing__grid">
+          <article class="price-card">
+            <h3>Бесплатно</h3>
+            <p style="color:var(--text-muted);font-size:0.9rem">Старт без карты</p>
+            <div class="price">0 ₽</div>
+            <ul>
+              <li>Построение карты</li>
+              <li>Базовый анализ личности</li>
+              <li>Баланс элементов</li>
+            </ul>
+            <a href="#calculator" class="btn btn--ghost" style="width:100%">Начать бесплатно</a>
+          </article>
+          <article class="price-card price-card--pro">
+            <h3>PRO</h3>
+            <p style="color:var(--text-muted);font-size:0.9rem">Для глубокой аналитики</p>
+            <div class="price">от 990 ₽ <span>/ мес</span></div>
+            <ul>
+              <li>Расширенный анализ</li>
+              <li>PDF-отчёт 30–50 страниц</li>
+              <li>Годовые прогнозы</li>
+              <li>AI-консультант без лимитов</li>
+            </ul>
+            <a href="#" class="btn btn--primary" style="width:100%">Оформить PRO</a>
+          </article>
+          <article class="price-card">
+            <h3>Консультации</h3>
+            <p style="color:var(--text-muted);font-size:0.9rem">Маркетплейс экспертов</p>
+            <div class="price">от 3 000 ₽</div>
+            <ul>
+              <li>Живые сессии с практиками</li>
+              <li>Академия и курсы</li>
+              <li>Разбор совместимости</li>
+            </ul>
+            <a href="#" class="btn btn--ghost" style="width:100%">Найти специалиста</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Audience -->
+    <section class="section section--alt reveal">
+      <div class="container">
+        <p class="section-label">Для кого</p>
+        <h2 class="section-title">Целевая аудитория</h2>
+        <div class="insights__grid" style="margin-top:2rem">
+          <article class="insight-card">
+            <h3>Новички</h3>
+            <p>Предназначение, отношения, карьера и финансы — понятный вход без перегруза терминами.</p>
+          </article>
+          <article class="insight-card">
+            <h3>Предприниматели</h3>
+            <p>Периоды роста, инвестиции и запуск проектов в благоприятные циклы удачи.</p>
+          </article>
+          <article class="insight-card">
+            <h3>Консультанты</h3>
+            <p>Быстрые расчёты, профессиональные отчёты и работа с клиентами в одном инструменте.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__brand">BAZI PRO</div>
+      <p class="footer__tagline">
+        Платформа персональной аналитики и жизненных циклов на основе китайской метафизики.
+        Не про предсказания. Не про мистику. Про понимание себя, своих сильных сторон, возможностей и времени для правильных решений.
+      </p>
+      <p class="footer__positioning" aria-hidden="true">四柱命理 · 个人分析平台</p>
+      <div class="footer__grid">
+        <div>
+          <h4>Продукт</h4>
+          <a href="#calculator">Калькулятор</a>
+          <a href="#pricing">PRO</a>
+          <a href="#ai">AI-Ассистент</a>
+        </div>
+        <div>
+          <h4>Обучение</h4>
+          <a href="#">Академия</a>
+          <a href="#">Блог</a>
+          <a href="#">Пять элементов</a>
+        </div>
+        <div>
+          <h4>SEO-разделы</h4>
+          <a href="#">Господин дня</a>
+          <a href="#">Такты удачи</a>
+          <a href="#">Совместимость</a>
+        </div>
+        <div>
+          <h4>Компания</h4>
+          <a href="#">О проекте</a>
+          <a href="#">Контакты</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>© 2026 BAZI PRO. Все права защищены.</span>
+        <span>Mobile First · PageSpeed 90+</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var header = document.getElementById("header");
+      var toggle = document.getElementById("nav-toggle");
+      var mobile = document.getElementById("nav-mobile");
+
+      window.addEventListener("scroll", function () {
+        header.classList.toggle("scrolled", window.scrollY > 20);
+      });
+
+      toggle.addEventListener("click", function () {
+        var open = mobile.classList.toggle("open");
+        toggle.setAttribute("aria-expanded", open);
+      });
+
+      mobile.querySelectorAll("a").forEach(function (link) {
+        link.addEventListener("click", function () {
+          mobile.classList.remove("open");
+          toggle.setAttribute("aria-expanded", "false");
+        });
+      });
+
+      document.querySelectorAll(".reveal").forEach(function (el) {
+        var obs = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) {
+                e.target.classList.add("visible");
+                obs.unobserve(e.target);
+              }
+            });
+          },
+          { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+        );
+        obs.observe(el);
+      });
+
+      document.getElementById("bazi-form").addEventListener("submit", function (e) {
+        e.preventDefault();
+        alert(
+          "Демо-версия лендинга.\n\nДанные приняты. Полный движок расчёта (Jie Qi, IANA TZ, Da Yun) подключается на следующем этапе разработки."
+        );
+      });
+
+      var answers = {
+        "Когда менять работу?":
+          "По текущему такту Da Yun энергия карьеры усиливается с 2026 года. Оптимальное окно для смены — вторая половина 2026, когда месячный столп поддерживает элемент Господина дня.",
+        "Стоит ли открывать бизнес?":
+          "Карта показывает сильный ресурсный элемент в 2027–2028. Запуск бизнеса целесообразен после стабилизации текущего годового прогноза — детали в расширенном PRO-отчёте.",
+        "Какие периоды наиболее перспективны?":
+          "Наиболее перспективны такты с поддержкой Полезного Бога: 2026 (рост), 2029 (финансы), 2032 (партнёрства). См. блок Da Yun на странице результатов.",
+        "Какие мои сильные стороны?":
+          "Господин дня указывает на аналитический склад и устойчивость в долгих циклах. Сильные стороны — стратегическое мышление и умение накапливать ресурс."
+      };
+
+      document.querySelectorAll(".ai-questions button").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var q = btn.getAttribute("data-question");
+          document.getElementById("ai-question").textContent = q;
+          document.getElementById("ai-answer").textContent =
+            answers[q] || "Постройте карту, чтобы AI отвечал на основе ваших данных.";
+        });
+      });
+
+    })();
+  </script>
+</body>
+</html>
