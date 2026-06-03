@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Эталонные тесты — BAZI PRO</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    body { padding: 2rem 1rem; max-width: 900px; margin: 0 auto; }
+    h1 { font-family: var(--font-display); margin-bottom: 1rem; }
+    .test-row { padding: 0.75rem; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 0.5rem; font-size: 0.9rem; }
+    .pass { border-left: 4px solid var(--accent); background: var(--jade-soft); }
+    .fail { border-left: 4px solid #c1121f; background: #fef2f2; }
+    .skip { opacity: 0.7; }
+    #summary { margin: 1.5rem 0; font-weight: 600; }
+    button { margin-top: 1rem; }
+  </style>
+</head>
+<body>
+  <h1>Эталонное тестирование (раздел 26)</h1>
+  <p style="color:var(--text-muted);margin-bottom:1rem">Сверка четырёх столпов с эталоном. Откройте через локальный HTTP-сервер.</p>
+  <div id="summary">Загрузка…</div>
+  <div id="results"></div>
+  <button class="btn btn--primary" id="run-btn">Запустить тесты</button>
+  <p style="margin-top:1rem"><a href="../index.html">← На главную</a></p>
+
+  <script src="../js/vendor/lunar.min.js"></script>
+  <script src="../js/engine/constants.js"></script>
+  <script src="../js/engine/geocode.js"></script>
+  <script src="../js/engine/timezone.js"></script>
+  <script src="../js/engine/solar-time.js"></script>
+  <script src="../js/engine/jieqi.js"></script>
+  <script src="../js/engine/interactions.js"></script>
+  <script src="../js/engine/strength.js"></script>
+  <script src="../js/engine/useful-gods.js"></script>
+  <script src="../js/engine/yearly.js"></script>
+  <script src="../js/engine/interpretation.js"></script>
+  <script src="../js/engine/bazi-engine.js"></script>
+  <script>
+    async function runTests() {
+      var res = await fetch("golden-cases.json");
+      var data = await res.json();
+      var box = document.getElementById("results");
+      box.innerHTML = "";
+      var pass = 0, fail = 0, skip = 0;
+
+      for (var i = 0; i < data.cases.length; i++) {
+        var tc = data.cases[i];
+        var row = document.createElement("div");
+        row.className = "test-row";
+        try {
+          var chart = await BaziEngine.calculateChart(tc.input);
+          var y = chart.pillars.year.ganZhi;
+          var m = chart.pillars.month.ganZhi;
+          var d = chart.pillars.day.ganZhi;
+          var h = chart.pillars.hour.ganZhi;
+          var ok = true;
+          var details = y + " " + m + " " + d + " " + h;
+          if (tc.smoke) {
+            ok = !!(y && m && d && h);
+          } else if (tc.expected) {
+            if (tc.expected.year && tc.expected.year !== y) ok = false;
+            if (tc.expected.month && tc.expected.month !== m) ok = false;
+            if (tc.expected.day && tc.expected.day !== d) ok = false;
+            if (tc.expected.hour && tc.expected.hour !== h) ok = false;
+            if (tc.expected.hourBranch && chart.pillars.hour.branch !== tc.expected.hourBranch) ok = false;
+          }
+          row.className += ok ? " pass" : " fail";
+          row.innerHTML = "<strong>" + tc.label + "</strong><br>" + (ok ? "✓ PASS" : "✗ FAIL") + ": " + details;
+          if (!ok && tc.expected.year) row.innerHTML += "<br>Ожидалось: " + [tc.expected.year, tc.expected.month, tc.expected.day, tc.expected.hour].filter(Boolean).join(" ");
+          ok ? pass++ : fail++;
+        } catch (e) {
+          row.className += " fail";
+          row.innerHTML = "<strong>" + tc.label + "</strong><br>Ошибка: " + e.message;
+          fail++;
+        }
+        box.appendChild(row);
+      }
+
+      document.getElementById("summary").textContent =
+        "Итого: " + pass + " пройдено, " + fail + " ошибок (из " + data.cases.length + " кейсов). Цель ТЗ: 1000+ карт — расширяйте golden-cases.json.";
+    }
+
+    document.getElementById("run-btn").addEventListener("click", runTests);
+    runTests();
+  </script>
+</body>
+</html>

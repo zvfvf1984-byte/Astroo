@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Результат — BAZI PRO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&family=Noto+Serif+SC:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/result.css">
+</head>
+<body>
+  <header class="header scrolled">
+    <div class="container header__inner">
+      <a href="index.html" class="logo">
+        <span class="logo__mark" aria-hidden="true">命</span>
+        BAZI PRO
+      </a>
+      <nav class="nav">
+        <a href="index.html#calculator">Новый расчёт</a>
+        <a href="tests/run-tests.html">Тесты</a>
+      </nav>
+      <a href="index.html#calculator" class="btn btn--primary btn--sm header-cta">Построить карту</a>
+    </div>
+  </header>
+
+  <main class="result-page">
+    <div class="container">
+      <div id="result-loading" class="result-loading">
+        <div class="spinner" aria-hidden="true"></div>
+        <p>Астрономический расчёт карты…</p>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem">Jie Qi · IANA TZ · четыре столпа</p>
+      </div>
+
+      <div id="result-error" class="result-error" hidden></div>
+
+      <div id="result-content" hidden>
+        <header class="result-header">
+          <h1 id="result-title">Карта Бацзы</h1>
+          <div class="result-meta" id="result-meta"></div>
+        </header>
+
+        <div class="result-grid result-grid--top">
+          <!-- Блок 1 -->
+          <section class="panel panel--wide" aria-labelledby="b1-title">
+            <h2 class="panel__title" id="b1-title">Карта Бацзы <span class="panel__subtitle">四柱</span></h2>
+            <div class="bazi-table-wrap">
+              <table class="bazi-table" id="bazi-table">
+                <thead><tr></tr></thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- Блок 2 -->
+          <section class="panel" aria-labelledby="b2-title">
+            <h2 class="panel__title" id="b2-title">Господин дня</h2>
+            <div class="day-master__label" id="day-master-label"></div>
+            <p id="day-master-desc" style="font-size:0.95rem;color:var(--text-muted)"></p>
+            <div class="day-master__traits">
+              <div class="trait-row"><strong>Качества</strong><span id="dm-qualities"></span></div>
+              <div class="trait-row"><strong>Сильные стороны</strong><span id="dm-strengths"></span></div>
+              <div class="trait-row"><strong>Потенциальные сложности</strong><span id="dm-challenges"></span></div>
+            </div>
+          </section>
+
+          <!-- Блок 3 -->
+          <section class="panel" aria-labelledby="b3-title">
+            <h2 class="panel__title" id="b3-title">Баланс элементов</h2>
+            <div class="elements-viz">
+              <div id="elements-donut"></div>
+              <div class="element-bars" id="element-bars"></div>
+            </div>
+          </section>
+        </div>
+
+        <div class="result-grid result-grid--mid" style="margin-top:1.5rem">
+          <!-- Блок 4 -->
+          <section class="panel">
+            <h2 class="panel__title">Сила карты</h2>
+            <div class="strength-meter">
+              <div class="strength-meter__value" id="strength-label"></div>
+              <div class="strength-meter__pct" id="strength-pct"></div>
+            </div>
+            <p class="strength-reason" id="strength-reason"></p>
+          </section>
+
+          <!-- Блок 5 -->
+          <section class="panel">
+            <h2 class="panel__title">Полезные элементы</h2>
+            <div class="gods-list" id="gods-list"></div>
+          </section>
+
+          <!-- Блок 6 -->
+          <section class="panel">
+            <h2 class="panel__title">Взаимодействия</h2>
+            <div class="interaction-map" id="interaction-map"></div>
+            <div class="interaction-list" id="interaction-list"></div>
+          </section>
+        </div>
+
+        <div class="result-grid" style="margin-top:1.5rem">
+          <!-- Блок 7 -->
+          <section class="panel panel--wide">
+            <h2 class="panel__title">Такты удачи (Da Yun) <span class="panel__subtitle">大运</span></h2>
+            <div class="dayun-timeline" id="dayun-timeline"></div>
+            <div class="dayun-detail" id="dayun-detail"></div>
+          </section>
+
+          <!-- Блок 8 -->
+          <section class="panel panel--wide">
+            <h2 class="panel__title">Календарь удачи</h2>
+            <p class="panel__subtitle" style="margin:-0.5rem 0 1rem">Помесячно (текущий год)</p>
+            <div class="heatmap-wrap">
+              <div class="heatmap" id="month-heatmap"></div>
+            </div>
+            <p class="panel__subtitle" style="margin:1.25rem 0 0.75rem">Годовой обзор (±30 лет от рождения)</p>
+            <div class="year-heatmap" id="year-heatmap"></div>
+          </section>
+
+          <!-- Блок 9 -->
+          <section class="panel panel--wide">
+            <h2 class="panel__title">Персональная интерпретация</h2>
+            <div class="ai-report" id="ai-report"></div>
+            <div class="engine-steps" id="engine-steps"></div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/vendor/lunar.min.js"></script>
+  <script src="js/engine/constants.js"></script>
+  <script src="js/engine/geocode.js"></script>
+  <script src="js/engine/timezone.js"></script>
+  <script src="js/engine/solar-time.js"></script>
+  <script src="js/engine/jieqi.js"></script>
+  <script src="js/engine/interactions.js"></script>
+  <script src="js/engine/strength.js"></script>
+  <script src="js/engine/useful-gods.js"></script>
+  <script src="js/engine/yearly.js"></script>
+  <script src="js/engine/interpretation.js"></script>
+  <script src="js/engine/bazi-engine.js"></script>
+  <script src="js/result-app.js"></script>
+</body>
+</html>

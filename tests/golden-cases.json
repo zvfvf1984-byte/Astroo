@@ -1,0 +1,81 @@
+{
+  "description": "Эталонные карты BAZI PRO — расширяйте до 1000+ по мере верификации",
+  "cases": [
+    {
+      "id": "moscow-1990",
+      "label": "Москва 1990-05-15 14:30 (smoke)",
+      "input": {
+        "birthDate": "1990-05-15",
+        "birthTime": "14:30",
+        "gender": "male",
+        "country": "ru",
+        "city": "Москва",
+        "unknownTime": false,
+        "useTrueSolarTime": false,
+        "manualTimezone": "Europe/Moscow"
+      },
+      "smoke": true
+    },
+    {
+      "id": "lichun-boundary",
+      "label": "Граница Li Chun 2024-02-04 Пекин",
+      "input": {
+        "birthDate": "2024-02-04",
+        "birthTime": "12:00",
+        "gender": "female",
+        "country": "other",
+        "city": "Beijing",
+        "useTrueSolarTime": false,
+        "manualTimezone": "Asia/Shanghai"
+      },
+      "smoke": true
+    },
+    {
+      "id": "zi-hour-late",
+      "label": "23:30 — ветвь часа 子",
+      "input": {
+        "birthDate": "1985-03-20",
+        "birthTime": "23:30",
+        "gender": "male",
+        "country": "ru",
+        "city": "Москва",
+        "useTrueSolarTime": false,
+        "manualTimezone": "Europe/Moscow",
+        "sect": 1
+      },
+      "expected": {
+        "hourBranch": "子"
+      }
+    },
+    {
+      "id": "year-before-lichun",
+      "label": "2000-01-01 — год до 立春",
+      "input": {
+        "birthDate": "2000-01-01",
+        "birthTime": "12:00",
+        "gender": "female",
+        "country": "ru",
+        "city": "Москва",
+        "useTrueSolarTime": false,
+        "manualTimezone": "Europe/Moscow"
+      },
+      "expected": {
+        "year": "己卯"
+      }
+    },
+    {
+      "id": "true-solar-moscow",
+      "label": "Истинное солнечное время включено",
+      "input": {
+        "birthDate": "1995-08-20",
+        "birthTime": "10:00",
+        "gender": "male",
+        "country": "ru",
+        "city": "Москва",
+        "useTrueSolarTime": true,
+        "manualTimezone": "Europe/Moscow"
+      },
+      "smoke": true
+    }
+  ]
+}

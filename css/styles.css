@@ -619,6 +619,32 @@ h1, h2, h3, h4 {
   margin-top: 1.5rem;
 }
 
+.calc-form__submit:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.calc-status {
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+  color: var(--accent);
+  text-align: center;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.checkbox-label input {
+  margin-top: 0.2rem;
+  accent-color: var(--accent);
+}
+
 .calc-features {
   display: flex;
   flex-direction: column;
