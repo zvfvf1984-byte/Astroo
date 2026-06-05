@@ -6,7 +6,7 @@
   <title>Результат — BAZI PRO</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&family=Noto+Serif+SC:wght@500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Manrope:wght@600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Noto+Serif+SC:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/result.css">
 </head>
@@ -19,6 +19,7 @@
       </a>
       <nav class="nav">
         <a href="index.html#calculator">Новый расчёт</a>
+        <a href="index.html#chart-results">На главной</a>
         <a href="tests/run-tests.html">Тесты</a>
       </nav>
       <a href="index.html#calculator" class="btn btn--primary btn--sm header-cta">Построить карту</a>
@@ -30,103 +31,137 @@
       <div id="result-loading" class="result-loading">
         <div class="spinner" aria-hidden="true"></div>
         <p>Астрономический расчёт карты…</p>
-        <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem">Jie Qi · IANA TZ · четыре столпа</p>
       </div>
 
-      <div id="result-error" class="result-error" hidden></div>
+      <div id="result-error" class="result-error" hidden role="alert"></div>
 
-      <div id="result-content" hidden>
+      <article id="result-content" hidden>
         <header class="result-header">
           <h1 id="result-title">Карта Бацзы</h1>
           <div class="result-meta" id="result-meta"></div>
         </header>
 
+        <section class="panel panel--wide">
+          <h2 class="panel__title">Карта Бацзы <span class="panel__subtitle">四柱</span></h2>
+          <div class="bazi-table-wrap">
+            <table class="bazi-table" id="bazi-table">
+              <caption class="sr-only">Четыре столпа</caption>
+              <thead>
+                <tr>
+                  <th></th><th>Час</th><th>День</th><th>Месяц</th><th>Год</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>Небесный ствол</th>
+                  <td class="bazi-cell" tabindex="0"><span class="bazi-cell__stem" id="stem-hour">—</span></td>
+                  <td class="bazi-cell" tabindex="0"><span class="bazi-cell__stem" id="stem-day">—</span></td>
+                  <td class="bazi-cell" tabindex="0"><span class="bazi-cell__stem" id="stem-month">—</span></td>
+                  <td class="bazi-cell" tabindex="0"><span class="bazi-cell__stem" id="stem-year">—</span></td>
+                </tr>
+                <tr>
+                  <th>Земная ветвь</th>
+                  <td class="bazi-cell" tabindex="0"><span class="bazi-cell__branch" id="branch-hour">—</span></td>
+                  <td class="bazi-cell" tabindex="0"><span class="bazi-cell__branch" id="branch-day">—</span></td>
+                  <td class="bazi-cell" tabindex="0"><span class="bazi-cell__branch" id="branch-month">—</span></td>
+                  <td class="bazi-cell" tabindex="0"><span class="bazi-cell__branch" id="branch-year">—</span></td>
+                </tr>
+                <tr>
+                  <th>干支</th>
+                  <td id="gz-hour">—</td><td id="gz-day">—</td><td id="gz-month">—</td><td id="gz-year">—</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="panel panel--wide">
+          <h2 class="panel__title">Скрытые стволы <span class="panel__subtitle">藏干</span></h2>
+          <table class="bazi-table">
+            <thead><tr><th>Столп</th><th>Ветвь</th><th>Qi</th></tr></thead>
+            <tbody id="hidden-stems-tbody"></tbody>
+          </table>
+        </section>
+
         <div class="result-grid result-grid--top">
-          <!-- Блок 1 -->
-          <section class="panel panel--wide" aria-labelledby="b1-title">
-            <h2 class="panel__title" id="b1-title">Карта Бацзы <span class="panel__subtitle">四柱</span></h2>
-            <div class="bazi-table-wrap">
-              <table class="bazi-table" id="bazi-table">
-                <thead><tr></tr></thead>
-                <tbody></tbody>
-              </table>
-            </div>
+          <section class="panel">
+            <h2 class="panel__title">Господин дня</h2>
+            <p class="day-master__label" id="day-master-label">—</p>
+            <p id="day-master-desc"></p>
+            <dl class="day-master__traits">
+              <div class="trait-row"><dt><strong>Качества</strong></dt><dd id="dm-qualities">—</dd></div>
+              <div class="trait-row"><dt><strong>Сильные стороны</strong></dt><dd id="dm-strengths">—</dd></div>
+              <div class="trait-row"><dt><strong>Сложности</strong></dt><dd id="dm-challenges">—</dd></div>
+            </dl>
           </section>
-
-          <!-- Блок 2 -->
-          <section class="panel" aria-labelledby="b2-title">
-            <h2 class="panel__title" id="b2-title">Господин дня</h2>
-            <div class="day-master__label" id="day-master-label"></div>
-            <p id="day-master-desc" style="font-size:0.95rem;color:var(--text-muted)"></p>
-            <div class="day-master__traits">
-              <div class="trait-row"><strong>Качества</strong><span id="dm-qualities"></span></div>
-              <div class="trait-row"><strong>Сильные стороны</strong><span id="dm-strengths"></span></div>
-              <div class="trait-row"><strong>Потенциальные сложности</strong><span id="dm-challenges"></span></div>
-            </div>
-          </section>
-
-          <!-- Блок 3 -->
-          <section class="panel" aria-labelledby="b3-title">
-            <h2 class="panel__title" id="b3-title">Баланс элементов</h2>
+          <section class="panel">
+            <h2 class="panel__title">Баланс элементов</h2>
             <div class="elements-viz">
-              <div id="elements-donut"></div>
-              <div class="element-bars" id="element-bars"></div>
+              <svg class="donut" viewBox="0 0 180 180" id="elements-donut"><g id="elements-donut-svg"></g></svg>
+              <div class="element-bars">
+                <div class="element-bar"><div class="element-bar__head"><span>Дерево</span><span id="el-pct-wood">0%</span></div><div class="element-bar__track"><div class="element-bar__fill el-wood" id="el-bar-wood"></div></div></div>
+                <div class="element-bar"><div class="element-bar__head"><span>Огонь</span><span id="el-pct-fire">0%</span></div><div class="element-bar__track"><div class="element-bar__fill el-fire" id="el-bar-fire"></div></div></div>
+                <div class="element-bar"><div class="element-bar__head"><span>Земля</span><span id="el-pct-earth">0%</span></div><div class="element-bar__track"><div class="element-bar__fill el-earth" id="el-bar-earth"></div></div></div>
+                <div class="element-bar"><div class="element-bar__head"><span>Металл</span><span id="el-pct-metal">0%</span></div><div class="element-bar__track"><div class="element-bar__fill el-metal" id="el-bar-metal"></div></div></div>
+                <div class="element-bar"><div class="element-bar__head"><span>Вода</span><span id="el-pct-water">0%</span></div><div class="element-bar__track"><div class="element-bar__fill el-water" id="el-bar-water"></div></div></div>
+              </div>
             </div>
           </section>
         </div>
 
         <div class="result-grid result-grid--mid" style="margin-top:1.5rem">
-          <!-- Блок 4 -->
           <section class="panel">
             <h2 class="panel__title">Сила карты</h2>
-            <div class="strength-meter">
-              <div class="strength-meter__value" id="strength-label"></div>
-              <div class="strength-meter__pct" id="strength-pct"></div>
-            </div>
-            <p class="strength-reason" id="strength-reason"></p>
+            <p class="strength-meter__value" id="strength-label">—</p>
+            <p class="strength-meter__pct" id="strength-pct">—</p>
+            <p class="strength-reason" id="strength-reason">—</p>
           </section>
-
-          <!-- Блок 5 -->
           <section class="panel">
             <h2 class="panel__title">Полезные элементы</h2>
-            <div class="gods-list" id="gods-list"></div>
+            <dl class="gods-list">
+              <div class="god-item god-item--yong"><dt>Yong Shen</dt><dd id="god-yong">—</dd></div>
+              <div class="god-item"><dt>Xi Shen</dt><dd id="god-xi">—</dd></div>
+              <div class="god-item god-item--ji"><dt>Ji Shen</dt><dd id="god-ji">—</dd></div>
+              <div class="god-item"><dt>Chou Shen</dt><dd id="god-chou">—</dd></div>
+            </dl>
           </section>
-
-          <!-- Блок 6 -->
           <section class="panel">
             <h2 class="panel__title">Взаимодействия</h2>
-            <div class="interaction-map" id="interaction-map"></div>
-            <div class="interaction-list" id="interaction-list"></div>
-          </section>
-        </div>
-
-        <div class="result-grid" style="margin-top:1.5rem">
-          <!-- Блок 7 -->
-          <section class="panel panel--wide">
-            <h2 class="panel__title">Такты удачи (Da Yun) <span class="panel__subtitle">大运</span></h2>
-            <div class="dayun-timeline" id="dayun-timeline"></div>
-            <div class="dayun-detail" id="dayun-detail"></div>
-          </section>
-
-          <!-- Блок 8 -->
-          <section class="panel panel--wide">
-            <h2 class="panel__title">Календарь удачи</h2>
-            <p class="panel__subtitle" style="margin:-0.5rem 0 1rem">Помесячно (текущий год)</p>
-            <div class="heatmap-wrap">
-              <div class="heatmap" id="month-heatmap"></div>
+            <div class="interaction-map">
+              <div class="interaction-node" id="inode-year">—<span>Год</span></div>
+              <div class="interaction-node" id="inode-month">—<span>Месяц</span></div>
+              <div class="interaction-node" id="inode-day">—<span>День</span></div>
+              <div class="interaction-node" id="inode-hour">—<span>Час</span></div>
             </div>
-            <p class="panel__subtitle" style="margin:1.25rem 0 0.75rem">Годовой обзор (±30 лет от рождения)</p>
-            <div class="year-heatmap" id="year-heatmap"></div>
-          </section>
-
-          <!-- Блок 9 -->
-          <section class="panel panel--wide">
-            <h2 class="panel__title">Персональная интерпретация</h2>
-            <div class="ai-report" id="ai-report"></div>
-            <div class="engine-steps" id="engine-steps"></div>
+            <ul class="interaction-list" id="interaction-list"></ul>
           </section>
         </div>
-      </div>
+
+        <section class="panel panel--wide" style="margin-top:1.5rem">
+          <h2 class="panel__title">Da Yun <span class="panel__subtitle">大运</span></h2>
+          <ul class="dayun-timeline" id="dayun-timeline"></ul>
+          <div class="dayun-detail" id="dayun-detail"></div>
+        </section>
+
+        <section class="panel panel--wide">
+          <h2 class="panel__title">Календарь удачи</h2>
+          <div class="heatmap" id="month-heatmap"></div>
+          <div class="year-heatmap" id="year-heatmap" style="margin-top:1rem"></div>
+        </section>
+
+        <section class="panel panel--wide">
+          <h2 class="panel__title">Интерпретация</h2>
+          <div class="ai-report" id="ai-report"></div>
+        </section>
+
+        <section class="panel panel--wide">
+          <h2 class="panel__title">Журнал BAZI Engine</h2>
+          <table class="bazi-table">
+            <thead><tr><th>Шаг</th><th>Этап</th><th>Результат</th></tr></thead>
+            <tbody id="pipeline-tbody"></tbody>
+          </table>
+        </section>
+      </article>
     </div>
   </main>
 
@@ -142,6 +177,7 @@
   <script src="js/engine/yearly.js"></script>
   <script src="js/engine/interpretation.js"></script>
   <script src="js/engine/bazi-engine.js"></script>
+  <script src="js/bazi-render.js"></script>
   <script src="js/result-app.js"></script>
 </body>
 </html>

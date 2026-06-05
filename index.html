@@ -7,8 +7,9 @@
   <title>BAZI PRO — Персональная аналитика и жизненные циклы</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&family=Noto+Serif+SC:wght@500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Manrope:wght@600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Noto+Serif+SC:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/result.css">
 </head>
 <body>
   <header class="header" id="header">
@@ -23,6 +24,7 @@
         <a href="#products">Продукты</a>
         <a href="#ai">AI-Ассистент</a>
         <a href="#pricing">Подписка</a>
+        <a href="#chart-results">Результат</a>
       </nav>
       <a href="#calculator" class="btn btn--primary btn--sm header-cta">Построить карту</a>
       <button class="nav-toggle" id="nav-toggle" aria-label="Открыть меню" aria-expanded="false">
@@ -36,6 +38,7 @@
       <a href="#products">Структура продукта</a>
       <a href="#ai">AI-Ассистент</a>
       <a href="#pricing">Подписка PRO</a>
+      <a href="#chart-results">Результат карты</a>
       <a href="#calculator" class="btn btn--primary" style="margin-top:0.5rem;text-align:center">Построить карту бесплатно</a>
     </nav>
   </header>
@@ -43,6 +46,10 @@
   <main>
     <!-- Hero -->
     <section class="hero" id="top">
+      <div class="hero__ambient" aria-hidden="true">
+        <span class="hero__orbit"></span>
+        <span class="hero__line"></span>
+      </div>
       <div class="container hero__grid">
         <div class="hero__content">
           <div class="hero__badge">
@@ -208,7 +215,7 @@
     <!-- Calculator -->
     <section class="section reveal" id="calculator">
       <div class="container calculator">
-        <p class="section-label">Калькулятор Бацзы</p>
+        <p class="section-label"><span class="section-label__idx">02</span> Калькулятор Бацзы</p>
         <h2 class="section-title">Постройте карту за 30 секунд</h2>
         <p class="section-desc">
           Укажите данные рождения — система автоматически определит координаты, часовой пояс и исторические поправки времени.
@@ -285,6 +292,197 @@
             </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- РЕЗУЛЬТАТЫ РАСЧЁТА — полная HTML-панель (разделы 24–25 ТЗ) -->
+    <section class="section results-observatory reveal" id="chart-results" hidden aria-live="polite">
+      <div class="results-observatory__glow" aria-hidden="true"></div>
+      <div class="container result-page">
+        <header class="results-observatory__head">
+          <p class="section-label"><span class="section-label__idx">01</span> Аналитическая панель</p>
+          <h2 class="section-title section-title--light">Результат расчёта карты Бацзы</h2>
+          <p class="section-desc section-desc--light">Десять этапов расчётного ядра — от координат до годовых влияний.</p>
+        </header>
+
+        <div id="result-loading" class="result-loading" hidden>
+          <div class="spinner" aria-hidden="true"></div>
+          <p>Астрономический расчёт карты…</p>
+        </div>
+
+        <div id="result-error" class="result-error" hidden role="alert"></div>
+
+        <article id="result-content" hidden>
+          <header class="result-header">
+            <h3 id="result-title">Карта Бацзы</h3>
+            <div class="result-meta" id="result-meta"></div>
+          </header>
+
+          <!-- Блок 1: Четыре столпа -->
+          <section class="panel panel--wide panel--featured" aria-labelledby="b1-title">
+            <h3 class="panel__title" id="b1-title">Карта Бацзы <span class="panel__subtitle">四柱</span></h3>
+            <div class="bazi-table-wrap">
+              <table class="bazi-table" id="bazi-table">
+                <caption class="sr-only">Четыре столпа судьбы: час, день, месяц, год</caption>
+                <thead>
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Час</th>
+                    <th scope="col">День</th>
+                    <th scope="col">Месяц</th>
+                    <th scope="col">Год</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">Небесный ствол</th>
+                    <td class="bazi-cell" tabindex="0" data-pos="hour" data-part="stem"><span class="bazi-cell__stem" id="stem-hour">—</span></td>
+                    <td class="bazi-cell" tabindex="0" data-pos="day" data-part="stem"><span class="bazi-cell__stem" id="stem-day">—</span></td>
+                    <td class="bazi-cell" tabindex="0" data-pos="month" data-part="stem"><span class="bazi-cell__stem" id="stem-month">—</span></td>
+                    <td class="bazi-cell" tabindex="0" data-pos="year" data-part="stem"><span class="bazi-cell__stem" id="stem-year">—</span></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Земная ветвь</th>
+                    <td class="bazi-cell" tabindex="0" data-pos="hour" data-part="branch"><span class="bazi-cell__branch" id="branch-hour">—</span></td>
+                    <td class="bazi-cell" tabindex="0" data-pos="day" data-part="branch"><span class="bazi-cell__branch" id="branch-day">—</span></td>
+                    <td class="bazi-cell" tabindex="0" data-pos="month" data-part="branch"><span class="bazi-cell__branch" id="branch-month">—</span></td>
+                    <td class="bazi-cell" tabindex="0" data-pos="year" data-part="branch"><span class="bazi-cell__branch" id="branch-year">—</span></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Столп (干支)</th>
+                    <td id="gz-hour">—</td>
+                    <td id="gz-day">—</td>
+                    <td id="gz-month">—</td>
+                    <td id="gz-year">—</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- Скрытые стволы -->
+          <section class="panel panel--wide" aria-labelledby="hidden-title">
+            <h3 class="panel__title" id="hidden-title">Скрытые небесные стволы <span class="panel__subtitle">藏干</span></h3>
+            <table class="bazi-table">
+              <thead>
+                <tr><th>Столп</th><th>Ветвь</th><th>Основной / вторичный / третичный Qi</th></tr>
+              </thead>
+              <tbody id="hidden-stems-tbody">
+                <tr><td>Час</td><td>—</td><td>—</td></tr>
+              </tbody>
+            </table>
+          </section>
+
+          <div class="result-grid result-grid--top">
+            <!-- Блок 2 -->
+            <section class="panel" aria-labelledby="b2-title">
+              <h3 class="panel__title" id="b2-title">Господин дня</h3>
+              <p class="day-master__label" id="day-master-label">—</p>
+              <p id="day-master-desc" style="font-size:0.95rem;color:var(--text-muted)">—</p>
+              <dl class="day-master__traits">
+                <div class="trait-row"><dt><strong>Качества</strong></dt><dd id="dm-qualities">—</dd></div>
+                <div class="trait-row"><dt><strong>Сильные стороны</strong></dt><dd id="dm-strengths">—</dd></div>
+                <div class="trait-row"><dt><strong>Потенциальные сложности</strong></dt><dd id="dm-challenges">—</dd></div>
+              </dl>
+            </section>
+
+            <!-- Блок 3 -->
+            <section class="panel" aria-labelledby="b3-title">
+              <h3 class="panel__title" id="b3-title">Баланс элементов</h3>
+              <div class="elements-viz">
+                <svg class="donut" viewBox="0 0 180 180" id="elements-donut" aria-label="Круговая диаграмма элементов">
+                  <g id="elements-donut-svg"></g>
+                </svg>
+                <div class="element-bars">
+                  <div class="element-bar"><div class="element-bar__head"><span>Дерево</span><span id="el-pct-wood">0%</span></div><div class="element-bar__track"><div class="element-bar__fill el-wood" id="el-bar-wood" style="width:0%"></div></div></div>
+                  <div class="element-bar"><div class="element-bar__head"><span>Огонь</span><span id="el-pct-fire">0%</span></div><div class="element-bar__track"><div class="element-bar__fill el-fire" id="el-bar-fire" style="width:0%"></div></div></div>
+                  <div class="element-bar"><div class="element-bar__head"><span>Земля</span><span id="el-pct-earth">0%</span></div><div class="element-bar__track"><div class="element-bar__fill el-earth" id="el-bar-earth" style="width:0%"></div></div></div>
+                  <div class="element-bar"><div class="element-bar__head"><span>Металл</span><span id="el-pct-metal">0%</span></div><div class="element-bar__track"><div class="element-bar__fill el-metal" id="el-bar-metal" style="width:0%"></div></div></div>
+                  <div class="element-bar"><div class="element-bar__head"><span>Вода</span><span id="el-pct-water">0%</span></div><div class="element-bar__track"><div class="element-bar__fill el-water" id="el-bar-water" style="width:0%"></div></div></div>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <div class="result-grid result-grid--mid" style="margin-top:1.5rem">
+            <!-- Блок 4 -->
+            <section class="panel">
+              <h3 class="panel__title">Сила карты</h3>
+              <div class="strength-meter">
+                <p class="strength-meter__value" id="strength-label">—</p>
+                <p class="strength-meter__pct" id="strength-pct">—</p>
+              </div>
+              <p class="strength-reason" id="strength-reason">—</p>
+            </section>
+
+            <!-- Блок 5 -->
+            <section class="panel">
+              <h3 class="panel__title">Полезные элементы</h3>
+              <dl class="gods-list">
+                <div class="god-item god-item--yong"><dt><strong>Yong Shen</strong></dt><dd id="god-yong">—</dd></div>
+                <div class="god-item"><dt><strong>Xi Shen</strong></dt><dd id="god-xi">—</dd></div>
+                <div class="god-item god-item--ji"><dt><strong>Неблагоприятные (Ji)</strong></dt><dd id="god-ji">—</dd></div>
+                <div class="god-item"><dt><strong>Chou Shen</strong></dt><dd id="god-chou">—</dd></div>
+              </dl>
+            </section>
+
+            <!-- Блок 6 -->
+            <section class="panel">
+              <h3 class="panel__title">Взаимодействия</h3>
+              <div class="interaction-map" role="list">
+                <div class="interaction-node" role="listitem" id="inode-year" data-pos="year">—<span>Год</span></div>
+                <div class="interaction-node" role="listitem" id="inode-month" data-pos="month">—<span>Месяц</span></div>
+                <div class="interaction-node" role="listitem" id="inode-day" data-pos="day">—<span>День</span></div>
+                <div class="interaction-node" role="listitem" id="inode-hour" data-pos="hour">—<span>Час</span></div>
+              </div>
+              <ul class="interaction-list" id="interaction-list"></ul>
+            </section>
+          </div>
+
+          <!-- Блок 7 -->
+          <section class="panel panel--wide" style="margin-top:1.5rem">
+            <h3 class="panel__title">Такты удачи (Da Yun) <span class="panel__subtitle">大运</span></h3>
+            <ul class="dayun-timeline" id="dayun-timeline" role="list"></ul>
+            <div class="dayun-detail" id="dayun-detail"><p>Выберите такт на таймлайне.</p></div>
+          </section>
+
+          <!-- Блок 8 -->
+          <section class="panel panel--wide">
+            <h3 class="panel__title">Календарь удачи</h3>
+            <p class="panel__subtitle">Помесячно (текущий год)</p>
+            <div class="heatmap-wrap"><div class="heatmap" id="month-heatmap" role="img" aria-label="Помесячный календарь удачи"></div></div>
+            <p class="panel__subtitle" style="margin-top:1.25rem">Годовой обзор (±30 лет)</p>
+            <div class="year-heatmap" id="year-heatmap" role="img" aria-label="Годовой календарь удачи"></div>
+          </section>
+
+          <!-- Блок 9 -->
+          <section class="panel panel--wide">
+            <h3 class="panel__title">Персональная интерпретация</h3>
+            <div class="ai-report" id="ai-report"><p>Заполните калькулятор выше и нажмите «Рассчитать карту».</p></div>
+          </section>
+
+          <!-- Журнал расчётного ядра (10 шагов) -->
+          <section class="panel panel--wide">
+            <h3 class="panel__title">Журнал расчётного ядра <span class="panel__subtitle">BAZI Engine</span></h3>
+            <table class="bazi-table">
+              <thead>
+                <tr><th>Шаг</th><th>Этап</th><th>Результат</th></tr>
+              </thead>
+              <tbody id="pipeline-tbody">
+                <tr><td>1</td><td>Координаты</td><td>—</td></tr>
+                <tr><td>2</td><td>IANA Time Zone</td><td>—</td></tr>
+                <tr><td>3</td><td>Истинное солнечное время</td><td>—</td></tr>
+                <tr><td>4</td><td>Jie Qi (24 сезона)</td><td>—</td></tr>
+                <tr><td>5</td><td>Четыре столпа</td><td>—</td></tr>
+                <tr><td>6</td><td>Скрытые стволы</td><td>—</td></tr>
+                <tr><td>7</td><td>Сила карты</td><td>—</td></tr>
+                <tr><td>8</td><td>Полезные элементы</td><td>—</td></tr>
+                <tr><td>9</td><td>Da Yun</td><td>—</td></tr>
+                <tr><td>10</td><td>Годовые влияния</td><td>—</td></tr>
+              </tbody>
+            </table>
+          </section>
+        </article>
       </div>
     </section>
 
@@ -500,43 +698,6 @@
         obs.observe(el);
       });
 
-      var unknownTimeCb = document.getElementById("unknown-time");
-      var birthTimeInput = document.getElementById("birth-time");
-      unknownTimeCb.addEventListener("change", function () {
-        birthTimeInput.disabled = unknownTimeCb.checked;
-        if (unknownTimeCb.checked) birthTimeInput.value = "12:00";
-      });
-
-      document.getElementById("bazi-form").addEventListener("submit", async function (e) {
-        e.preventDefault();
-        if (typeof BaziEngine === "undefined") {
-          alert("Загрузите страницу через локальный сервер (Live Server) — требуется расчётный движок.");
-          return;
-        }
-        var btn = document.getElementById("calc-submit");
-        var status = document.getElementById("calc-status");
-        btn.disabled = true;
-        status.hidden = false;
-        status.textContent = "Расчёт: координаты → IANA TZ → Jie Qi → столпы…";
-        var input = {
-          birthDate: document.getElementById("birth-date").value,
-          birthTime: document.getElementById("birth-time").value,
-          gender: document.getElementById("gender").value,
-          country: document.getElementById("country").value,
-          city: document.getElementById("city").value,
-          unknownTime: unknownTimeCb.checked,
-          useTrueSolarTime: document.getElementById("true-solar").checked,
-          manualTimezone: document.getElementById("manual-tz").value.trim() || null
-        };
-        try {
-          sessionStorage.setItem("baziPending", JSON.stringify(input));
-          location.href = "result.html?recalc=1";
-        } catch (err) {
-          status.textContent = err.message || String(err);
-          btn.disabled = false;
-        }
-      });
-
       var answers = {
         "Когда менять работу?":
           "По текущему такту Da Yun энергия карьеры усиливается с 2026 года. Оптимальное окно для смены — вторая половина 2026, когда месячный столп поддерживает элемент Господина дня.",
@@ -571,5 +732,7 @@
   <script src="js/engine/yearly.js"></script>
   <script src="js/engine/interpretation.js"></script>
   <script src="js/engine/bazi-engine.js"></script>
+  <script src="js/bazi-render.js"></script>
+  <script src="js/calc-app.js"></script>
 </body>
 </html>
