@@ -4,20 +4,33 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Эталонные тесты — BAZI PRO</title>
+  <script>
+    (function () {
+      var t = localStorage.getItem("bazi-theme");
+      var dark = t === "dark" || (!t && window.matchMedia("(prefers-color-scheme: dark)").matches);
+      document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
+    })();
+  </script>
   <link rel="stylesheet" href="../css/styles.css">
   <style>
-    body { padding: 2rem 1rem; max-width: 900px; margin: 0 auto; }
+    body { padding: 2rem 1rem; max-width: 900px; margin: 0 auto; background: var(--bg); color: var(--text); }
     h1 { font-family: var(--font-display); margin-bottom: 1rem; }
     .test-row { padding: 0.75rem; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 0.5rem; font-size: 0.9rem; }
     .pass { border-left: 4px solid var(--accent); background: var(--jade-soft); }
-    .fail { border-left: 4px solid #c1121f; background: #fef2f2; }
+    .fail { border-left: 4px solid #e85d5d; background: rgba(232, 93, 93, 0.12); }
     .skip { opacity: 0.7; }
     #summary { margin: 1.5rem 0; font-weight: 600; }
     button { margin-top: 1rem; }
   </style>
 </head>
 <body>
-  <h1>Эталонное тестирование (раздел 26)</h1>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1rem">
+    <h1 style="margin:0">Эталонное тестирование (раздел 26)</h1>
+    <button type="button" class="theme-toggle" aria-pressed="false" aria-label="Включить тёмную тему">
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+    </button>
+  </div>
   <p style="color:var(--text-muted);margin-bottom:1rem">Сверка четырёх столпов с эталоном. Откройте через локальный HTTP-сервер.</p>
   <div id="summary">Загрузка…</div>
   <div id="results"></div>
@@ -84,5 +97,6 @@
     document.getElementById("run-btn").addEventListener("click", runTests);
     runTests();
   </script>
+  <script src="../js/theme.js"></script>
 </body>
 </html>
