@@ -42,6 +42,7 @@
   --observatory-panel: rgba(255, 255, 255, 0.03);
   --observatory-border: rgba(255, 255, 255, 0.08);
   --hero-gradient-end: var(--accent);
+  --wuxing-canvas: #faf8f4;
   color-scheme: light;
 }
 
@@ -77,6 +78,7 @@
   --observatory-panel: rgba(255, 255, 255, 0.04);
   --observatory-border: rgba(255, 255, 255, 0.09);
   --hero-gradient-end: var(--accent-light);
+  --wuxing-canvas: #f3efe6;
 }
 
 *,
@@ -622,26 +624,58 @@ h1, h2, h3, h4 {
   opacity: 0.9;
 }
 
-/* Five elements diagram */
-.elements-ring {
+/* Five elements diagram (Wu Xing) — рамка в стиле сайта, цвета без искажений */
+.wuxing-diagram {
+  margin: 0;
+  padding: 0.65rem;
+  border-radius: var(--radius);
+  background: var(--jade-soft);
+  border: 1px solid var(--border-strong);
+  position: relative;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.wuxing-diagram::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 1.25rem;
+  right: 1.25rem;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--gold), var(--accent));
+  border-radius: 0 0 3px 3px;
+  opacity: 0.85;
+}
+
+.wuxing-diagram__canvas {
+  display: block;
+  padding: 0.5rem;
+  border-radius: calc(var(--radius) - 4px);
+  background: var(--wuxing-canvas);
+  border: 1px solid var(--border);
+  box-shadow: 0 2px 16px rgba(12, 31, 30, 0.06);
+}
+
+.wuxing-diagram img {
+  display: block;
   width: 100%;
-  aspect-ratio: 1;
-  max-width: 320px;
+  max-width: 360px;
   margin: 0 auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: calc(var(--radius) - 8px);
+  /* Без blend/filter — сохраняем чистые цвета стихий */
 }
 
-.element-legend {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 0.5rem;
-  margin-top: 1.25rem;
+[data-theme="dark"] .wuxing-diagram {
+  background: rgba(43, 181, 169, 0.08);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
-.element-legend span {
-  text-align: center;
-  font-size: 0.7rem;
-  font-weight: 600;
-  color: var(--text-muted);
+[data-theme="dark"] .wuxing-diagram__canvas {
+  background: var(--wuxing-canvas);
+  border-color: rgba(176, 141, 87, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 @keyframes fadeUp {
